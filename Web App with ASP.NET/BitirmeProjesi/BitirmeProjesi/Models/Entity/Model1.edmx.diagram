@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="44a339ff944d4d72bb9ac79b890856d5" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="BitirmeProjesiModel.TBLOgrenciler" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BitirmeProjesiModel.TBLOgretmenler" Width="1.5" PointX="5" PointY="0.875" />
+        <EntityTypeShape EntityType="BitirmeProjesiModel.TBLKonular" Width="1.5" PointX="7" PointY="0.875" />
+        <EntityTypeShape EntityType="BitirmeProjesiModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="0.875" />
+        <AssociationConnector Association="BitirmeProjesiModel.FK_TBLKonular_TBLOgretmenler" />
+        <EntityTypeShape EntityType="BitirmeProjesiModel.TBLIstekler" Width="1.5" PointX="2.5" PointY="0.875" />
+        <AssociationConnector Association="BitirmeProjesiModel.FK_TBLIstekler_TBLOgrenciler" />
+        <AssociationConnector Association="BitirmeProjesiModel.FK_TBLIstekler_TBLOgretmenlerAp" />
+        <AssociationConnector Association="BitirmeProjesiModel.FK_TBLIstekler_TBLOgretmenlerBp" />
+        <EntityTypeShape EntityType="BitirmeProjesiModel.TBLDuyurular" Width="1.5" PointX="7" PointY="3" />
+        <AssociationConnector Association="BitirmeProjesiModel.FK_TBLDuyurular_TBLOgretmenler" />
+        <EntityTypeShape EntityType="BitirmeProjesiModel.TBLMesajlar" Width="1.5" PointX="5" PointY="4" />
+        <AssociationConnector Association="BitirmeProjesiModel.FK_TBLMesajlar_TBLOgrenciler" />
+        <AssociationConnector Association="BitirmeProjesiModel.FK_TBLMesajlar_TBLOgretmenler" />
+        <EntityTypeShape EntityType="BitirmeProjesiModel.TBLYoneticiler" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="BitirmeProjesiModel.FK_TBLMesajlar_TBLYoneticiler" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

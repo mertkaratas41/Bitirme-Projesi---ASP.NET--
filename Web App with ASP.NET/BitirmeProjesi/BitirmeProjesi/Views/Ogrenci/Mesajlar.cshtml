@@ -1,0 +1,100 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model List<TBLMesajlar>
+@{
+    ViewBag.Title = "Mesajlar";
+    Layout = "~/Views/Shared/_Ogrenci.cshtml";
+}
+<link rel="stylesheet" href="~/Content/Mesaj.css">
+
+<div style="margin-top:50px;"></div>
+<div class="sidebar">
+    <div class="active">Adminler</div>
+    @foreach (var ogr in ViewBag.yoneticiler)
+    {
+        @*<a href="/Ogrenci/Mesajlar/@ogr.ID">@ogr.ISIM</a>*@
+        <!--@Html.ActionLink("Mesajlar", "Mesajlar", new { id = ogr.ID, tablo = 2 }, null) ;-->
+        String isim = ogr.ISIM;
+
+        @Html.ActionLink(
+             linkText: isim,
+             actionName: "Mesajlar",
+             controllerName: "Ogrenci",
+             routeValues: new
+                  {
+                 id = ogr.ID,
+                 tablo = 2
+             },
+             htmlAttributes: null
+            )
+    }
+    <div class="active">Ogretmenler</div>
+    @foreach (var ogr in ViewBag.ogr)
+    {
+        @*<a href="/Ogrenci/Mesajlar/@ogr.ID">@ogr.ISIM</a>*@
+        String isim = ogr.ISIM;
+
+        @Html.ActionLink(
+             linkText: isim,
+             actionName: "Mesajlar",
+             controllerName: "Ogrenci",
+             routeValues: new
+                  {
+                 id = ogr.ID,
+                 tablo = 1
+             },
+             htmlAttributes: null
+)
+
+    }
+    @*@ViewBag.id*@
+</div>
+@{int tablo = ViewBag.tablo, deneme = ViewBag.ogrenciId;}
+<div class="content">
+    @foreach (var mesaj in Model)
+    {
+        if (tablo == 1)
+        {
+            if (mesaj.OGRENCID == deneme && mesaj.OGRETMENID == ViewBag.id)
+            {
+                if (mesaj.MESAJYOLU == 0)
+                {
+                    <div class="mesaj darker">
+                        <p>@mesaj.MESAJ</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="mesaj">
+                        <p>@mesaj.MESAJ</p>
+                    </div>
+                }
+            }
+        }
+        else
+        {
+            if (mesaj.OGRENCID == deneme && mesaj.YONETICIID == ViewBag.id)
+            {
+                if (mesaj.MESAJYOLU == 0)
+                {
+                    <div class="mesaj darker">
+                        <p>@mesaj.MESAJ</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="mesaj">
+                        <p>@mesaj.MESAJ</p>
+                    </div>
+                }
+            }
+        }
+    }
+    @using (Html.BeginForm("MesajGonder", "Ogrenci", FormMethod.Post))
+    {
+        <input type="text" style="margin-top:5px;width:500px;height:30px;" placeholder="Mesajınız " name="mesaj">
+        <input type="text" style="margin-top:5px;" placeholder="id" hidden name="id" value="@ViewBag.id">
+        <input type="text" style="margin-top:5px;" placeholder="id" hidden name="tablo" value="@tablo">
+        <button type="submit" class="btn btn-light" style="margin-top:5px; ">Mesajı Gönder</button> <!-- Giriş yap butonu-->
+    }
+</div>
+

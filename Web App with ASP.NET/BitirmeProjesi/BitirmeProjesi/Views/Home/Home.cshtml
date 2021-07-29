@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = null;
+}
+
+@*<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>KOÜ</title>
+            <link rel="icon" href="icons/logorgb.png">
+            <link rel="stylesheet" type="text/css" href="~/content/home.css">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        </head>
+        <body>
+            <div class="orta">
+                 <h1 style="text-align:center; font-size: 40px;"> <i class="fas fa-graduation-cap"></i> @Html.ActionLink("Öğrenci Girişi", "OgrenciGiris", "Ogrenci")</h1>
+
+                 <h1 style="text-align:center;  font-size: 40px;"> <i class="fa fa-users"></i> @Html.ActionLink("Öğretmen Girişi", "OgretmenGiris", "Ogretmen")</h1>
+
+                 <h1 style="text-align:center;  font-size: 40px;"> <i class="fa fa-male"></i> @Html.ActionLink("Yönetici Girişi", "YoneticiGiris", "Yonetici")</h1>
+
+            </div>
+
+
+        </body>
+    </html>*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOÜ</title>
+    <link rel="icon" href="indir.gif">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Content/home.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="banner"><center><img src=@Url.Content("~/Content/images/indir.jpeg") alt="logo" width="250" height="250" /></center> Araştırma ve Bitirme Projeleri Portalı</div>
+
+    <ul>
+        <a href="/Ogretmen/OgretmenGiris" class="box">
+            <div class="icon"><i class="fas fa-users"></i></div>
+
+            <div class="content">
+                <h3>Akademik Personel</h3>
+                <p>
+                    Giriş yapın, çalışma konularınızı belirleyin,
+                    öğrencilerle iletişime geçin ve gelen istekleri yönetin ve onaylı öğrencilerinizin listesini indirin
+
+                </p>
+            </div>
+        </a>
+        <a href="/Ogrenci/OgrenciGiris" class="box">
+            <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+
+            <div class="content">
+                <h3>Öğrenci</h3>
+                <p>
+                    Kaydolun,giriş yapın, çalışma konunuzu ve danışmanınızı belirleyin,
+                    danışmanlarla iletişime geçin ve onay almayı bekleyin
+
+                </p>
+            </div>
+        </a>
+        <a href="/Yonetici/YoneticiGiris" class="box">
+            <div class="icon"><i class="fas fa-users-cog"></i></div>
+            <div class="content">
+                <h3>Yönetici</h3>
+                <p>
+                    Giriş yapın, tüm danışmanları ve öğrencileri görüntüleyin, danışman ve öğrenci bilgilerini indirin ve sistemi yönetin
+                </p>
+            </div>
+        </a>
+    </ul>
+</body>
+</html>
+

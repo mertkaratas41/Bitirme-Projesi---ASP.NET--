@@ -1,0 +1,78 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model List<TBLMesajlar>
+@{
+    ViewBag.Title = "Mesaj";
+    Layout = "~/Views/Shared/_Ogretmen.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Mesaj.css">
+<div style="margin-top:50px;"></div>
+@{int deneme = ViewBag.ogretmenId;}
+@{ List<TBLMesajlar> tekrarlar = new List<TBLMesajlar>(); List<TBLMesajlar> mesajlarım = new List<TBLMesajlar>();}
+@foreach (var ogr in Model)
+{
+    mesajlarım.Add(ogr);
+}
+@{ var elde = mesajlarım.Where(x => x.OGRETMENID == deneme);}
+@{ var elde1 = elde.GroupBy(test => test.OGRENCID)
+                    .Select(grp => grp.First())
+                    .ToList();}
+<div class="sidebar">
+    <div class="active">Adminler</div>
+    @foreach (var ogr in ViewBag.yoneticiler)
+    {
+        @*<a href="/Ogrenci/Mesajlar/@ogr.ID">@ogr.ISIM</a>*@
+        <!--@Html.ActionLink("Mesajlar", "Mesajlar", new { id = ogr.ID, tablo = 2 }, null) ;-->
+        String isim = ogr.ISIM;
+
+        @Html.ActionLink(
+             linkText: isim,
+             actionName: "Mesajlar",
+             controllerName: "Ogretmen",
+             routeValues: new
+                  {
+                 id = ogr.ID,
+                 tablo = 2
+             },
+             htmlAttributes: null
+            )
+    }
+    <div class="active">Öğrenci Mesajlarım</div>
+
+    @foreach (var ogr in elde1)
+    {
+        if (ogr.OGRETMENID == deneme && ogr.OGRENCID != null)
+        {
+            @*<a href="/Ogretmen/Mesajlar/@ogr.OGRENCID">@ogr.TBLOgrenciler.ISIM</a>*@
+            String isim = ogr.TBLOgrenciler.ISIM;
+            @Html.ActionLink(
+             linkText: isim,
+             actionName: "Mesajlar",
+             controllerName: "Ogretmen",
+             routeValues: new
+                  {
+                 id = ogr.OGRENCID,
+                 tablo = 0
+             },
+             htmlAttributes: null
+            )
+        }
+    }
+    <div class="active">Ogrenciler</div>
+    @foreach (var ogr in ViewBag.ogr)
+    {
+        @*<a href="/Ogretmen/Mesajlar/@ogr.ID">@ogr.ISIM</a>*@
+        String isim = ogr.ISIM;
+        @Html.ActionLink(
+         linkText: isim,
+         actionName: "Mesajlar",
+         controllerName: "Ogretmen",
+         routeValues: new
+              {
+             id = ogr.ID,
+             tablo = 0
+         },
+         htmlAttributes: null
+        )
+    }
+</div>

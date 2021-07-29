@@ -1,0 +1,61 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model List<TBLOgretmenler>
+@{
+    ViewBag.Title = "AnaSayfa";
+    Layout = "~/Views/Shared/_Ogrenci.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="~/Content/OgrenciAnaSayfa.css">
+    
+</head>
+
+<h3 style="">AnaSayfa</h3>
+
+    @foreach (var ogr in Model)
+    {
+        <button class="accordion">@ogr.ISIM</button>
+
+        <div class="panel">
+            <ul>
+                <h3>Araştırma Projesi Konuları</h3>
+                @foreach (var konu in ogr.TBLKonular)
+                {
+                    if (konu.OGRETMENID == ogr.ID && konu.KONU == "ap")
+                    {
+                        <li>@konu.ICERIK</li>
+
+                    }
+                }
+                <h3>Bitirme Projesi Konuları</h3>
+                @foreach (var konu in ogr.TBLKonular)
+                {
+                    if (konu.OGRETMENID == ogr.ID && konu.KONU == "bp")
+                    {
+                        <li>@konu.ICERIK</li>
+                    }
+                }
+                <br />
+                <br />
+                @*<li><a href="/Ogrenci/IstekAp/@ogr.ID">Araştırma Projesi için başvur</a></li>
+                <li><a href="/Ogrenci/IstekBp/@ogr.ID">Bitirme Projesi için başvur</a></li>*@
+                @using (Html.BeginForm("IstekApcik", "Ogrenci", FormMethod.Post))
+                {
+                    <input type="text" style="margin-top:5px;" placeholder="Açıklama " name="yazi">
+                    <input type="password" style="margin-top:5px;" placeholder="id" value="@ogr.ID" hidden name="id">
+                    <button type="submit" style="margin-top:5px;">Araştırma Projesi</button>
+                    <!-- Giriş yap butonu-->
+                }
+                @using (Html.BeginForm("IstekBpcik", "Ogrenci", FormMethod.Post))
+                {
+                    <input type="text" style="margin-top:5px;" placeholder="Açıklama " name="yazi">
+                    <input type="password" style="margin-top:5px;" placeholder="id" value="@ogr.ID" hidden name="id">
+                    <button type="submit" style="margin-top:5px;">Bitirme Projesi</button>
+                    <!-- Giriş yap butonu-->
+                }
+                
+            </ul>
+        </div>
+    }
+    @*@ViewBag.ogrenciId*@
+
+<script src="~/Content/scripts/OgrenciAnaSayfa.js"></script>

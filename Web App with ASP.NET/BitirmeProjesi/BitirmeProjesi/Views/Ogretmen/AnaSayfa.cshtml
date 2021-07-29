@@ -1,0 +1,61 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model List<TBLKonular>
+@{
+    ViewBag.Title = "AnaSayfa";
+    Layout = "~/Views/Shared/_Ogretmen.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h2>AnaSayfa</h2>
+<ul>
+    <h3>AP</h3>
+
+    @foreach (var m in Model)
+    {
+        int ogretmen = int.Parse(@ViewBag.ogretmenId.ToString());
+
+        if (m.OGRETMENID == ogretmen && m.KONU == "ap")
+        {
+            <li>
+                @m.ICERIK
+            </li>
+            <li><a href="/Ogretmen/KonuSil/@m.ID" class="btn btn-danger">Sil</a></li>
+        }
+
+    }
+
+    <li>
+        @using (Html.BeginForm("apEkle", "Ogretmen", FormMethod.Post))
+        {
+            <input type="text" style="margin-top: 5px; width: 500px; height: 30px;" placeholder="Yeni Araştırma Projesi Konusu " name="ap">
+            <button type="submit" style="margin-top:5px;">Ap Konusu Ekle</button>
+        }
+    </li>
+    <h3>BP</h3>
+
+    @foreach (var m in Model)
+    {
+        int ogretmen = int.Parse(@ViewBag.ogretmenId.ToString());
+
+        if (m.OGRETMENID == ogretmen && m.KONU == "bp")
+        {
+            <li>
+                @m.ICERIK
+            </li>
+            <li><a href="/Ogretmen/KonuSil/@m.ID" class="btn btn-danger">Sil</a></li>
+        }
+    }
+
+    <li>
+        @using (Html.BeginForm("bpEkle", "Ogretmen", FormMethod.Post))
+        {
+            <input type="text" style="margin-top:5px;" placeholder="Yeni Bitirme Projesi Konusu " name="bp">
+            <button type="submit" style="margin-top:5px;">Bp Konusu Ekle</button>
+        }
+    </li>
+
+
+</ul>
+
+
+<br />
+@*@ViewBag.ogretmenId*@

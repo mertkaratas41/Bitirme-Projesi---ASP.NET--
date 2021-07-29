@@ -1,0 +1,58 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model TBLIstekler
+@{
+    ViewBag.Title = "Ogretmenlerim";
+    Layout = "~/Views/Shared/_Ogrenci.cshtml";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h2>Ogretmenlerim</h2>
+
+<center><a href="/Ogrenci/Duyurular/" style="text-align:center;margin-top:50px;" class="btn btn-light">Duyurular</a></center>
+
+<table class="table table-bordered" style="margin-top:50px;">
+    <tr>
+        <th>Konu</th>
+        <th>Adı-Soyadı</th>
+        <th>İstek</th>
+        <th>Cevap</th>
+        <th>Kabul Durumu</th>
+    </tr>
+    @if (Model.APONAY != -1)
+    {
+        <tr>
+            <th>Araştırma Projesi</th>
+            <td>@Model.TBLOgretmenler.ISIM</td>
+            <td>@Model.APACIKLAMA</td>
+            <td>@Model.APCEVAP</td>
+            @if(Model.APONAY==-2)
+            {
+                <td>Reddedildi</td>
+            }
+            @if (Model.APONAY == 1)
+            {
+                <td>Kabul Edildi</td>
+            }
+        </tr>
+    }
+    @if (Model.BPONAY != -1)
+    {
+        <tr>
+            <th>Bitirme Projesi</th>
+            <td>@Model.TBLOgretmenler1.ISIM</td>
+            <td>@Model.BPACIKLAMA</td>
+            <td>@Model.BPCEVAP</td>
+            @if(Model.BPONAY==-2)
+            {
+                <td>Reddedildi</td>
+            }
+
+            @if (Model.BPONAY == 1)
+            {
+            <td>Kabul Edildi</td>
+            }
+        </tr>
+    }
+
+
+</table>

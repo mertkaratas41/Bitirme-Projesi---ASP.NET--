@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akademisyen</title>
+    <link rel="icon" href="indir.png.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/_Yonetici.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo"><i class="fas fa-users-cog"></i> KOCAELİ ÜNİVERSİTESİ</div>
+
+        <nav>
+            <ul>
+                @*<li class="active"><i class="fas fa-home"></i><a href="/Yonetici/AnaSayfa">Ana Sayfa</a></li>
+                <li><i class="fas fa-users"></i><a href="/Yonetici/Ogrenciler">Öğrenciler</a></li>
+                <li><i class="fas fa-envelope"></i><a href="/Yonetici/Mesaj">Mesaj</a></li>
+                <li><i class="fas fa-user"></i><a href="/Yonetici/Profil">Profil</a></li>
+                <li><i class="fas fa-sign-out-alt"></i><a href="/Yonetici/YoneticiGiris">Çıkış</a></li>
+                    <li>@Html.ActionLink("Ana Sayfa", "AnaSayfa", "Yonetici",null, new { @class="fas fa-home" })</li>*@
+                <li>@Html.ActionLink("Ana Sayfa", "AnaSayfa", "Yonetici")</li>
+                <li>@Html.ActionLink("Öğrenciler", "Ogrenciler", "Yonetici")</li>
+                <li>@Html.ActionLink("Mesaj", "Mesaj", "Yonetici")</li>
+                <li>@Html.ActionLink("Profil", "Profil", "Yonetici")</li>
+                <li>@Html.ActionLink("Çıkış", "YoneticiGiris", "Yonetici")</li>
+            </ul>
+        </nav>
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

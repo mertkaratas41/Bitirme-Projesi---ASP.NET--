@@ -1,0 +1,193 @@
+﻿body 
+{
+
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #ecf0f5;
+
+}
+
+/*.container {
+
+    position: relative;
+    width: 1020px;
+    height: 255px;
+    margin: 240px auto;
+    
+    top: 120px;
+    
+
+}*/
+
+
+.box 
+{
+    top: 400px;
+    left: 190px;
+    position: relative;
+    width: calc(340px - 10px);
+    height: calc(255px - 10px);
+    background: rgb(0, 0, 0);
+    float: left;
+    margin:15px ;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 10px;
+
+}
+
+ .box .icon{
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f00;
+    transition: 0.5s;
+    z-index: 1;
+
+
+}
+ .box:hover .icon{
+
+    top: 20px;
+    left: calc(50% - 40px);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+
+
+}
+
+ .box .icon .fas {
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    transition: 0.5s;
+    color: #fff;
+
+}
+
+.box:hover .icon .fas {
+
+    font-size: 40px;
+
+
+}
+
+.box .content{
+
+
+position: absolute;
+top: 100%;
+height: calc(100% - 100px);
+text-align: center;
+padding: 20px;
+box-sizing: border-box;
+transition: 0.5s;
+opacity: 0;
+
+}
+
+ .box:hover .content{
+
+top: 100px;
+opacity: 1;
+
+
+
+}
+.box .content h3{
+
+    margin: 0 0 10px;
+    padding: 0;
+    color: #fff;
+    font-size: 24px;
+
+
+}
+ .box .content p{
+
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    
+
+
+}
+
+
+ .box:nth-child(1) .icon{
+
+    background: #23798e ;
+}
+
+ .box:nth-child(1) {
+
+    background: #328fa5 ;
+}
+
+ .box:nth-child(2) .icon{
+
+    background: #319635 ;
+}
+
+ .box:nth-child(2) {
+
+    background: #4caf50 ;
+}
+
+ .box:nth-child(3) .icon{
+
+    background: #d03852 ;
+}
+
+ .box:nth-child(3) {
+
+    background: #f54967 ;
+}
+
+
+ .box:nth-child(1) {
+
+    display: block; 
+    text-decoration: none;
+}
+ .box:nth-child(2) {
+
+    display: block; 
+    text-decoration: none;
+}
+
+ .box:nth-child(3) {
+
+    display: block; 
+    text-decoration: none;
+}
+
+.banner {
+
+position: absolute;
+top: 60px;
+left: 320px;
+
+font-size: 50px;
+font-family: 'Poppins', sans-serif;
+}
+body::after{
+    
+    content: "";
+    background: url(http://bilsis.kocaeli.edu.tr/assets/dist/img/logorgb.png);/* arkaplan */
+    opacity: 0.1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    z-index: -1;
+}

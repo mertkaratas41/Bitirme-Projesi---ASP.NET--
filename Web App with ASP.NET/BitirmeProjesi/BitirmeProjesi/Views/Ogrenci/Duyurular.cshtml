@@ -1,0 +1,54 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model List<TBLIstekler>
+@{
+    ViewBag.Title = "Duyurular";
+    Layout = "~/Views/Shared/_Ogrenci.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h2>Duyurular</h2>
+<div style="margin-top:50px;"></div>
+@{int sayac = 0, deneme = ViewBag.ogrenciId; }
+<table class="table table-bordered">
+    @foreach (var istek in Model)
+    {
+        if (istek.OGRENCIID == deneme)
+        {
+            <tr>
+                <th>@istek.TBLOgretmenler.ISIM</th>
+                <th>Duyuru</th>
+            </tr>
+        }
+    }
+    @foreach (var istek in Model)
+    {
+        if (istek.OGRENCIID == deneme)
+        {
+            foreach (var duyuru in istek.TBLOgretmenler.TBLDuyurular)
+            {
+                if (duyuru.OGRETMENID == istek.TBLOgretmenler.ID)
+                {
+                    <tr>
+                        <th>@(sayac+1)</th>
+                        <td>@duyuru.DUYURU</td>
+                    </tr>
+                    sayac++;
+                }
+            }
+            sayac = 0;
+            foreach (var duyuru in istek.TBLOgretmenler1.TBLDuyurular)
+            {
+                if (duyuru.OGRETMENID == istek.TBLOgretmenler1.ID)
+                {
+                    <tr>
+                        <th>@(sayac+1)</th>
+                        <td>@duyuru.DUYURU</td>
+                    </tr>
+                    sayac++;
+                }
+            }
+        }
+
+
+    }
+    @{ sayac = 0;}
+</table>

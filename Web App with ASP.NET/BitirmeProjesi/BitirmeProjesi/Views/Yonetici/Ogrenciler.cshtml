@@ -1,0 +1,52 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model List<TBLOgrenciler>
+@{
+    ViewBag.Title = "Ogrenciler";
+    Layout = "~/Views/Shared/_Yonetici.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h2>Ogrenciler</h2>
+@{int sayac = 0, deneme = ViewBag.yoneticiId; }
+<center><a href="/Yonetici/OgrenciEkle/" style="text-align:center;margin-top:10px;" class="btn btn-dark">Yeni Öğrenci Ekle</a></center>
+<table class="table table-bordered">
+    <tr>
+        <th>Ap</th>
+        <th>Adı-Soyadı</th>
+        <th>Bölümü</th>
+        <td>NUMARASI</td>
+        <th>Adresi</th>
+        <th>Telefon</th>
+
+    </tr>
+    @foreach (var ogr in Model)
+    {
+            <tr>
+                <th>@(sayac + 1)</th>
+                <td>
+                    @{
+                        String isim = ogr.ISIM;
+                    }
+                    @Html.ActionLink(
+                         linkText: isim,
+                         actionName: "ProfilKontrol",
+                         controllerName: "Yonetici",
+                         routeValues: new
+                              {
+                             id = ogr.ID,
+                             deger = 0
+                         },
+                         htmlAttributes: null
+                        )
+                </td>
+                <td>@ogr.BOLUM</td>
+                <td>@ogr.NUMARA</td>
+                <td>@ogr.ADRES</td>
+                <td>@ogr.TELEFON</td>
+                
+            </tr>
+
+            sayac++;
+        
+    }
+    @{ sayac = 0;}
+</table>

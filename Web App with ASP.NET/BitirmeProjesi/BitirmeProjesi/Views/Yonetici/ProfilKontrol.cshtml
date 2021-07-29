@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "ProfilKontrol";
+    Layout = "~/Views/Shared/_Yonetici.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="~/Content/ogrencigirisekrani.css">
+    <link rel="icon" href="icons/logorgb.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+</head>
+
+
+<body>
+    <div class="form">
+        <div class="tab-content">
+
+            <div class="tab-body active">
+                <div class="form-element">
+
+                    @{
+                        String isim = ViewBag.kim.ISIM;
+                        String mail = ViewBag.kim.MAIL;
+                        String sifre = ViewBag.kim.SIFRE;
+                        <b>İSİM: </b>@Html.TextBox("ISIM", isim, new { style = "color:red" })
+                        <b>MAİL: </b>@Html.TextBox("MAIL", mail, new { style = "color:red" })
+                        <b>SİFRE: </b>@Html.TextBox("sifre", sifre, new { style = "color:red" })
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+

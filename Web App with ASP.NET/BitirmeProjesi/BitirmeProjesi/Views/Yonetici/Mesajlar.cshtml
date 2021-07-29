@@ -1,0 +1,158 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model List<TBLMesajlar>
+@{
+    ViewBag.Title = "Mesajlar";
+    Layout = "~/Views/Shared/_Yonetici.cshtml";
+}
+<link rel="stylesheet" href="~/Content/Mesaj.css">
+<div style="margin-top:50px;"></div>
+@{int tablo = ViewBag.tablo, deneme = ViewBag.yoneticiId;}
+@{ List<TBLMesajlar> tekrarlar = new List<TBLMesajlar>(); List<TBLMesajlar> mesajlarım = new List<TBLMesajlar>(); int sayac = 0;}
+@foreach (var ogr in Model)
+{
+    mesajlarım.Add(ogr);
+}
+@{ var elde = mesajlarım.Where(x => x.YONETICIID == deneme).GroupBy(test => test.OGRENCID)
+                        .Select(grp => grp.First())
+                        .ToList();}
+@{ var elde1 = mesajlarım.Where(x => x.YONETICIID == deneme).GroupBy(test => test.OGRETMENID)
+                        .Select(grp => grp.First())
+                        .ToList();}
+<div class="sidebar">
+    <div class="active">Öğretmen Mesajlarım</div>
+    @foreach (var ogr in elde1)
+    {
+        if (ogr.OGRETMENID != null)
+        {
+            @*<a href="/Ogretmen/Mesajlar/@ogr.OGRENCID">@ogr.TBLOgrenciler.ISIM</a>*@
+            String isim = ogr.TBLOgretmenler.ISIM;
+            @Html.ActionLink(
+             linkText: isim,
+             actionName: "Mesajlar",
+             controllerName: "Yonetici",
+             routeValues: new
+                  {
+                 id = ogr.OGRETMENID,
+                 tablo = 1
+             },
+             htmlAttributes: null
+            )
+        }
+    }
+    <div class="active">Öğretmenler</div>
+    @foreach (var ogr in ViewBag.ogretmenler)
+    {
+        @*<a href="/Ogretmen/Mesajlar/@ogr.ID">@ogr.ISIM</a>*@
+        String isim = ogr.ISIM;
+        @Html.ActionLink(
+         linkText: isim,
+         actionName: "Mesajlar",
+         controllerName: "Yonetici",
+         routeValues: new
+              {
+             id = ogr.ID,
+             tablo = 1
+         },
+         htmlAttributes: null
+        )
+    }
+    <div class="active">Öğrenci Mesajlarım</div>
+
+    @foreach (var ogr in elde)
+    {
+        if (ogr.OGRENCID != null)
+        {
+            @*<a href="/Ogretmen/Mesajlar/@ogr.OGRENCID">@ogr.TBLOgrenciler.ISIM</a>*@
+            String isim = ogr.TBLOgrenciler.ISIM;
+            @Html.ActionLink(
+             linkText: isim,
+             actionName: "Mesajlar",
+             controllerName: "Yonetici",
+             routeValues: new
+                  {
+                 id = ogr.OGRENCID,
+                 tablo = 0
+             },
+             htmlAttributes: null
+            )
+        }
+    }
+    <div class="active">Öğrenciler</div>
+    @foreach (var ogr in ViewBag.ogrenciler)
+    {
+        @*<a href="/Ogretmen/Mesajlar/@ogr.ID">@ogr.ISIM</a>*@
+        String isim = ogr.ISIM;
+        @Html.ActionLink(
+         linkText: isim,
+         actionName: "Mesajlar",
+         controllerName: "Yonetici",
+         routeValues: new
+              {
+             id = ogr.ID,
+             tablo = 0
+         },
+         htmlAttributes: null
+        )
+    }
+</div>
+
+<div class="content">
+
+    @foreach (var mesaj in Model)
+    {
+        if (tablo == 0)
+        {
+            if (mesaj.YONETICIID == deneme && mesaj.OGRENCID == ViewBag.id)
+            {
+                if (sayac == 0)
+                {
+                    <div class="darker"><h2 style="text-align:center;">@mesaj.TBLOgrenciler.ISIM</h2></div>
+                    sayac++;
+                }
+                if (mesaj.MESAJYOLU == 2)
+                {
+                    <div class="mesaj darker">
+                        <p>@mesaj.MESAJ</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="mesaj">
+                        <p>@mesaj.MESAJ</p>
+                    </div>
+                }
+            }
+        }
+        else
+        {
+            if (mesaj.YONETICIID == deneme && mesaj.OGRETMENID == ViewBag.id)
+            {
+                if (sayac == 0)
+                {
+                    <div class="darker"><h2 style="text-align:center;">@mesaj.TBLOgretmenler.ISIM</h2></div>
+                    sayac++;
+                }
+                if (mesaj.MESAJYOLU == 2)
+                {
+                    <div class="mesaj darker">
+                        <p>@mesaj.MESAJ</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="mesaj">
+                        <p>@mesaj.MESAJ</p>
+                    </div>
+                }
+            }
+        }
+
+    }
+    @using (Html.BeginForm("MesajGonder", "Yonetici", FormMethod.Post))
+    {
+        <input type="text" style="margin-top:5px;width:500px;height:30px;" placeholder="Mesajınız " name="mesaj">
+        <input type="text" style="margin-top:5px;" placeholder="id" hidden name="id" value="@ViewBag.id">
+        <input type="text" style="margin-top:5px;" placeholder="id" hidden name="tablo" value="@tablo">
+        <button type="submit" class="btn btn-light" style="margin-top:5px; ">Mesajı Gönder</button> <!-- Giriş yap butonu-->
+    }
+</div>

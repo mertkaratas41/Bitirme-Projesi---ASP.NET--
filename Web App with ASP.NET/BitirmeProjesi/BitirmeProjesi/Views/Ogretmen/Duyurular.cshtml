@@ -1,0 +1,39 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model List<TBLDuyurular>
+@{
+    ViewBag.Title = "Duyurular";
+    Layout = "~/Views/Shared/_Ogretmen.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h2>Duyurular</h2>
+
+@{int sayac = 0, deneme = ViewBag.ogretmenId; }
+<table class="table table-bordered">
+    <tr>
+        <th>Duyuru Sırası</th>
+        <th>Duyuru</th>
+        <th>Kaldır</th>
+    </tr>
+    @foreach (var duyuru in Model)
+    {
+
+        if (duyuru.OGRETMENID==deneme)
+        {
+            <tr>
+                <th>@(sayac+1)</th>
+                <td>@duyuru.DUYURU</td>
+                <td><a href="/Ogretmen/DuyuruKaldir/@duyuru.ID" style="text-align:center;margin-top:10px;" class="btn btn-danger">Kaldır</a></td>
+            </tr>
+            sayac++;
+        }
+    }
+<tr>
+    <th>@(sayac+1)</th>
+    @using (Html.BeginForm("Duyuru", "Ogretmen", FormMethod.Post))
+    {
+        <th><input type="text" style="margin-top:5px; width:500px;height:30px;" placeholder="Duyuru" name="duyuru"></th>
+        <th><button type="submit" class="btn btn-dark" style="margin-top:5px;">Duyuruyu Paylaş</button></th>
+        <!-- Giriş yap butonu-->
+        }
+    </tr>
+</table>

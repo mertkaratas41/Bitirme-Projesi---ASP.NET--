@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BitirmeProjesiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TBLOgrenciler">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ISIM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SIFRE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFON" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="BOLUM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ADRES" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBLIstekler" Relationship="BitirmeProjesiModel.FK_TBLIstekler_TBLOgrenciler" FromRole="TBLOgrenciler" ToRole="TBLIstekler" />
+    <NavigationProperty Name="TBLMesajlar" Relationship="BitirmeProjesiModel.FK_TBLMesajlar_TBLOgrenciler" FromRole="TBLOgrenciler" ToRole="TBLMesajlar" />
+    <Property Name="NUMARA" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="BitirmeProjesiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TBLOgrenciler" EntityType="Self.TBLOgrenciler" />
+    <EntitySet Name="TBLOgretmenler" EntityType="BitirmeProjesiModel.TBLOgretmenler" />
+    <EntitySet Name="TBLKonular" EntityType="BitirmeProjesiModel.TBLKonular" />
+    <EntitySet Name="sysdiagrams" EntityType="BitirmeProjesiModel.sysdiagrams" />
+    <AssociationSet Name="FK_TBLKonular_TBLOgretmenler" Association="BitirmeProjesiModel.FK_TBLKonular_TBLOgretmenler">
+      <End Role="TBLOgretmenler" EntitySet="TBLOgretmenler" />
+      <End Role="TBLKonular" EntitySet="TBLKonular" />
+    </AssociationSet>
+    <EntitySet Name="TBLIstekler" EntityType="BitirmeProjesiModel.TBLIstekler" />
+    <AssociationSet Name="FK_TBLIstekler_TBLOgrenciler" Association="BitirmeProjesiModel.FK_TBLIstekler_TBLOgrenciler">
+      <End Role="TBLOgrenciler" EntitySet="TBLOgrenciler" />
+      <End Role="TBLIstekler" EntitySet="TBLIstekler" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(BitirmeProjesiModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(BitirmeProjesiModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <AssociationSet Name="FK_TBLIstekler_TBLOgretmenlerAp" Association="BitirmeProjesiModel.FK_TBLIstekler_TBLOgretmenlerAp">
+      <End Role="TBLOgretmenler" EntitySet="TBLOgretmenler" />
+      <End Role="TBLIstekler" EntitySet="TBLIstekler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLIstekler_TBLOgretmenlerBp" Association="BitirmeProjesiModel.FK_TBLIstekler_TBLOgretmenlerBp">
+      <End Role="TBLOgretmenler" EntitySet="TBLOgretmenler" />
+      <End Role="TBLIstekler" EntitySet="TBLIstekler" />
+    </AssociationSet>
+    <EntitySet Name="TBLDuyurular" EntityType="BitirmeProjesiModel.TBLDuyurular" />
+    <AssociationSet Name="FK_TBLDuyurular_TBLOgretmenler" Association="BitirmeProjesiModel.FK_TBLDuyurular_TBLOgretmenler">
+      <End Role="TBLOgretmenler" EntitySet="TBLOgretmenler" />
+      <End Role="TBLDuyurular" EntitySet="TBLDuyurular" />
+    </AssociationSet>
+    <EntitySet Name="TBLMesajlar" EntityType="BitirmeProjesiModel.TBLMesajlar" />
+    <AssociationSet Name="FK_TBLMesajlar_TBLOgrenciler" Association="BitirmeProjesiModel.FK_TBLMesajlar_TBLOgrenciler">
+      <End Role="TBLOgrenciler" EntitySet="TBLOgrenciler" />
+      <End Role="TBLMesajlar" EntitySet="TBLMesajlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLMesajlar_TBLOgretmenler" Association="BitirmeProjesiModel.FK_TBLMesajlar_TBLOgretmenler">
+      <End Role="TBLOgretmenler" EntitySet="TBLOgretmenler" />
+      <End Role="TBLMesajlar" EntitySet="TBLMesajlar" />
+    </AssociationSet>
+    <EntitySet Name="TBLYoneticiler" EntityType="BitirmeProjesiModel.TBLYoneticiler" />
+    <AssociationSet Name="FK_TBLMesajlar_TBLYoneticiler" Association="BitirmeProjesiModel.FK_TBLMesajlar_TBLYoneticiler">
+      <End Role="TBLYoneticiler" EntitySet="TBLYoneticiler" />
+      <End Role="TBLMesajlar" EntitySet="TBLMesajlar" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TBLOgretmenler">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ISIM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SIFRE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBLKonular" Relationship="BitirmeProjesiModel.FK_TBLKonular_TBLOgretmenler" FromRole="TBLOgretmenler" ToRole="TBLKonular" />
+    <NavigationProperty Name="TBLIstekler" Relationship="BitirmeProjesiModel.FK_TBLIstekler_TBLOgretmenlerAp" FromRole="TBLOgretmenler" ToRole="TBLIstekler" />
+    <NavigationProperty Name="TBLIstekler1" Relationship="BitirmeProjesiModel.FK_TBLIstekler_TBLOgretmenlerBp" FromRole="TBLOgretmenler" ToRole="TBLIstekler" />
+    <NavigationProperty Name="TBLDuyurular" Relationship="BitirmeProjesiModel.FK_TBLDuyurular_TBLOgretmenler" FromRole="TBLOgretmenler" ToRole="TBLDuyurular" />
+    <NavigationProperty Name="TBLMesajlar" Relationship="BitirmeProjesiModel.FK_TBLMesajlar_TBLOgretmenler" FromRole="TBLOgretmenler" ToRole="TBLMesajlar" />
+  </EntityType>
+  <EntityType Name="TBLKonular">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OGRETMENID" Type="Int32" />
+    <Property Name="KONU" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ICERIK" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBLOgretmenler" Relationship="BitirmeProjesiModel.FK_TBLKonular_TBLOgretmenler" FromRole="TBLKonular" ToRole="TBLOgretmenler" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_TBLKonular_TBLOgretmenler">
+    <End Type="BitirmeProjesiModel.TBLOgretmenler" Role="TBLOgretmenler" Multiplicity="0..1" />
+    <End Type="BitirmeProjesiModel.TBLKonular" Role="TBLKonular" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLOgretmenler">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLKonular">
+        <PropertyRef Name="OGRETMENID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TBLIstekler">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="APID" Type="Int32" />
+    <Property Name="BPID" Type="Int32" />
+    <Property Name="OGRENCIID" Type="Int32" />
+    <NavigationProperty Name="TBLOgrenciler" Relationship="BitirmeProjesiModel.FK_TBLIstekler_TBLOgrenciler" FromRole="TBLIstekler" ToRole="TBLOgrenciler" />
+    <Property Name="APONAY" Type="Int32" />
+    <Property Name="BPONAY" Type="Int32" />
+    <Property Name="APACIKLAMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="BPACIKLAMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="APCEVAP" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="BPCEVAP" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBLOgretmenler" Relationship="BitirmeProjesiModel.FK_TBLIstekler_TBLOgretmenlerAp" FromRole="TBLIstekler" ToRole="TBLOgretmenler" />
+    <NavigationProperty Name="TBLOgretmenler1" Relationship="BitirmeProjesiModel.FK_TBLIstekler_TBLOgretmenlerBp" FromRole="TBLIstekler" ToRole="TBLOgretmenler" />
+  </EntityType>
+  <Association Name="FK_TBLIstekler_TBLOgrenciler">
+    <End Type="BitirmeProjesiModel.TBLOgrenciler" Role="TBLOgrenciler" Multiplicity="0..1" />
+    <End Type="BitirmeProjesiModel.TBLIstekler" Role="TBLIstekler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLOgrenciler">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLIstekler">
+        <PropertyRef Name="OGRENCIID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <Association Name="FK_TBLIstekler_TBLOgretmenlerAp">
+    <End Type="BitirmeProjesiModel.TBLOgretmenler" Role="TBLOgretmenler" Multiplicity="0..1" />
+    <End Type="BitirmeProjesiModel.TBLIstekler" Role="TBLIstekler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLOgretmenler">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLIstekler">
+        <PropertyRef Name="APID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLIstekler_TBLOgretmenlerBp">
+    <End Type="BitirmeProjesiModel.TBLOgretmenler" Role="TBLOgretmenler" Multiplicity="0..1" />
+    <End Type="BitirmeProjesiModel.TBLIstekler" Role="TBLIstekler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLOgretmenler">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLIstekler">
+        <PropertyRef Name="BPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TBLDuyurular">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OGRETMENID" Type="Int32" />
+    <Property Name="DUYURU" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBLOgretmenler" Relationship="BitirmeProjesiModel.FK_TBLDuyurular_TBLOgretmenler" FromRole="TBLDuyurular" ToRole="TBLOgretmenler" />
+  </EntityType>
+  <Association Name="FK_TBLDuyurular_TBLOgretmenler">
+    <End Type="BitirmeProjesiModel.TBLOgretmenler" Role="TBLOgretmenler" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="BitirmeProjesiModel.TBLDuyurular" Role="TBLDuyurular" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLOgretmenler">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLDuyurular">
+        <PropertyRef Name="OGRETMENID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TBLMesajlar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OGRENCID" Type="Int32" />
+    <Property Name="OGRETMENID" Type="Int32" />
+    <Property Name="YONETICIID" Type="Int32" />
+    <Property Name="MESAJ" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBLOgrenciler" Relationship="BitirmeProjesiModel.FK_TBLMesajlar_TBLOgrenciler" FromRole="TBLMesajlar" ToRole="TBLOgrenciler" />
+    <NavigationProperty Name="TBLOgretmenler" Relationship="BitirmeProjesiModel.FK_TBLMesajlar_TBLOgretmenler" FromRole="TBLMesajlar" ToRole="TBLOgretmenler" />
+    <Property Name="MESAJYOLU" Type="Int32" />
+    <NavigationProperty Name="TBLYoneticiler" Relationship="BitirmeProjesiModel.FK_TBLMesajlar_TBLYoneticiler" FromRole="TBLMesajlar" ToRole="TBLYoneticiler" />
+  </EntityType>
+  <Association Name="FK_TBLMesajlar_TBLOgrenciler">
+    <End Type="BitirmeProjesiModel.TBLOgrenciler" Role="TBLOgrenciler" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="BitirmeProjesiModel.TBLMesajlar" Role="TBLMesajlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLOgrenciler">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLMesajlar">
+        <PropertyRef Name="OGRENCID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLMesajlar_TBLOgretmenler">
+    <End Type="BitirmeProjesiModel.TBLOgretmenler" Role="TBLOgretmenler" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="BitirmeProjesiModel.TBLMesajlar" Role="TBLMesajlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLOgretmenler">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLMesajlar">
+        <PropertyRef Name="OGRETMENID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TBLYoneticiler">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ISIM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SIFRE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBLMesajlar" Relationship="BitirmeProjesiModel.FK_TBLMesajlar_TBLYoneticiler" FromRole="TBLYoneticiler" ToRole="TBLMesajlar" />
+  </EntityType>
+  <Association Name="FK_TBLMesajlar_TBLYoneticiler">
+    <End Type="BitirmeProjesiModel.TBLYoneticiler" Role="TBLYoneticiler" Multiplicity="0..1" />
+    <End Type="BitirmeProjesiModel.TBLMesajlar" Role="TBLMesajlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLYoneticiler">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLMesajlar">
+        <PropertyRef Name="YONETICIID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

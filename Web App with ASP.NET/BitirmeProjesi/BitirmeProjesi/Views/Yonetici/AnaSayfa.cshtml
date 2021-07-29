@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "AnaSayfa";
+    Layout = "~/Views/Shared/_Yonetici.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@{int sayac = 0, deneme = ViewBag.yoneticiId; }
+<table class="table table-bordered" style="margin-top:50px;">
+    <tr>
+        <th>
+            @using (Html.BeginForm("ExcelExport", "Yonetici", FormMethod.Post))
+            {
+
+                <input type="text" style="margin-top:5px;" placeholder="deger " name="i" hidden value="0">
+                <input type="text" style="margin-top:5px;" placeholder="ogretmen " name="ogretmenid" hidden value="0">
+                <button type="submit" class="btn btn-dark" style="margin-top:5px;">Tüm Listeyi İndir</button> <!-- Giriş yap butonu-->
+            }
+            </th>
+        <th>Adı-Soyadı</th>
+        <th>Araştırma Projesi Listesi</th>
+        <th>Bitirme Projesi Listesi</th>
+    </tr>
+    @foreach (var ogr in ViewBag.ogr)
+    {
+
+            <tr>
+                <th>@(sayac+1)</th>
+                <td>
+                    @{
+                        String isim = ogr.ISIM;
+                    }
+                    @Html.ActionLink(
+                         linkText: isim,
+                         actionName: "ProfilKontrol",
+                         controllerName: "Yonetici",
+                         routeValues: new
+                              {
+                             id = ogr.ID,
+                             deger = 1
+                         },
+                         htmlAttributes: null
+                        )
+                </td>
+                <th>
+            @using (Html.BeginForm("ExcelExport", "Yonetici", FormMethod.Post))
+            {
+
+                <input type="text" style="margin-top:5px;" placeholder="deger " name="i" hidden value="1">
+                <input type="text" style="margin-top:5px;" placeholder="ogretmen " name="ogretmenid" hidden value="@ogr.ID">
+                <button type="submit" class="btn btn-dark" style="margin-top:5px;">İndir</button> <!-- Giriş yap butonu-->
+            }
+        </th>
+                <th>
+            @using (Html.BeginForm("ExcelExport", "Yonetici", FormMethod.Post))
+            {
+                <input type="text" style="margin-top:5px;" placeholder="deger " name="i" hidden value="2">
+                <input type="text" style="margin-top:5px;" placeholder="ogretmen " name="ogretmenid" hidden value="@ogr.ID">
+                <button type="submit" class="btn btn-dark" style="margin-top:5px;">İndir</button> <!-- Giriş yap butonu-->
+            }
+        </th>
+            </tr>
+            sayac++;
+        
+
+
+    }
+</table>
+<center><a href="/Yonetici/OgretmenEkle/" style="text-align:center;margin-top:10px;" class="btn btn-dark">Yeni Öğretmen Ekle</a></center>

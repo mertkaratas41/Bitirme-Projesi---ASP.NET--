@@ -1,0 +1,45 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model TBLOgretmenler
+@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/Shared/_Ogretmen.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="~/Content/ogrencigirisekrani.css">
+    <link rel="icon" href="icons/logorgb.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+</head>
+
+
+<body>
+    <div class="form">
+        <div class="tab-content">
+
+            <div class="tab-body active">
+                <div class="form-element">
+                    @using (Html.BeginForm("Guncelleme", "Ogretmen", FormMethod.Post))
+                    {
+                        @Html.LabelFor(m => m.ISIM)
+                        @Html.TextBoxFor(m => m.ISIM)
+                        @Html.LabelFor(m => m.MAIL)
+                        @Html.TextBoxFor(m => m.MAIL)
+                        @Html.LabelFor(m => m.SIFRE)
+                        @Html.TextBoxFor(m => m.SIFRE)
+                        <button type="submit">Değiştir</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+

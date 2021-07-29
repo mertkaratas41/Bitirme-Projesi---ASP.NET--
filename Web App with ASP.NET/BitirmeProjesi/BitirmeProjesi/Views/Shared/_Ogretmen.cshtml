@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Akademisyen</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="~/Content/_Ogretmen.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+    <header>
+        <div class="logo"><i class="fa fa-users"></i> KOCAELİ ÜNİVERSİTESİ</div>
+
+        <nav>
+            <ul>
+                <li>@Html.ActionLink("Ana Sayfa", "AnaSayfa", "Ogretmen")</li>
+                <li>@Html.ActionLink("İstekler", "Istekler", "Ogretmen")</li>
+                <li>@Html.ActionLink("Öğrenciler", "KabulIstekler", "Ogretmen")</li>
+                <li>@Html.ActionLink("Mesaj", "Mesaj", "Ogretmen")</li>
+                <li>@Html.ActionLink("Profil", "Profil", "Ogretmen")</li>
+                <li>@Html.ActionLink("Çıkış", "OgretmenGiris", "Ogretmen")</li>
+            </ul>
+        </nav>
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+    </header>
+        <body>
+            <div>
+                @RenderBody()
+            </div>
+        </body>
+</html>

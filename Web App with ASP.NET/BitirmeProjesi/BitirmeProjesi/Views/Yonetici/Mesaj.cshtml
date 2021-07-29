@@ -1,0 +1,100 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model List<TBLMesajlar>
+@{
+    ViewBag.Title = "Mesaj";
+    Layout = "~/Views/Shared/_Yonetici.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Mesaj.css">
+<div style="margin-top:50px;"></div>
+@{int deneme = ViewBag.yoneticiId;}
+@{ List<TBLMesajlar> tekrarlar = new List<TBLMesajlar>(); List<TBLMesajlar> mesajlarım = new List<TBLMesajlar>();}
+@foreach (var ogr in Model)
+{
+    mesajlarım.Add(ogr);
+}
+@{ var elde = mesajlarım.Where(x => x.YONETICIID == deneme).GroupBy(test => test.OGRENCID)
+                      .Select(grp => grp.First())
+                      .ToList();}
+@{ var elde1 = mesajlarım.Where(x => x.YONETICIID == deneme).GroupBy(test => test.OGRETMENID)
+                      .Select(grp => grp.First())
+                      .ToList();}
+
+<div class="sidebar">
+    <div class="active">Öğretmen Mesajlarım</div>
+    @foreach (var ogr in elde1)
+    {
+        if (ogr.OGRETMENID != null)
+        {
+            @*<a href="/Ogretmen/Mesajlar/@ogr.OGRENCID">@ogr.TBLOgrenciler.ISIM</a>*@
+            String isim = ogr.TBLOgretmenler.ISIM;
+            @Html.ActionLink(
+             linkText: isim,
+             actionName: "Mesajlar",
+             controllerName: "Yonetici",
+             routeValues: new
+                  {
+                 id = ogr.OGRETMENID,
+                 tablo = 1
+             },
+             htmlAttributes: null
+            )
+        }
+    }
+    <div class="active">Öğretmenler</div>
+    @foreach (var ogr in ViewBag.ogretmenler)
+    {
+        @*<a href="/Ogretmen/Mesajlar/@ogr.ID">@ogr.ISIM</a>*@
+        String isim = ogr.ISIM;
+        @Html.ActionLink(
+         linkText: isim,
+         actionName: "Mesajlar",
+         controllerName: "Yonetici",
+         routeValues: new
+              {
+             id = ogr.ID,
+             tablo = 1
+         },
+         htmlAttributes: null
+        )
+    }
+    <div class="active">Öğrenci Mesajlarım</div>
+
+    @foreach (var ogr in elde)
+    {
+        if (ogr.OGRENCID != null)
+        {
+            @*<a href="/Ogretmen/Mesajlar/@ogr.OGRENCID">@ogr.TBLOgrenciler.ISIM</a>*@
+            String isim = ogr.TBLOgrenciler.ISIM;
+            @Html.ActionLink(
+             linkText: isim,
+             actionName: "Mesajlar",
+             controllerName: "Yonetici",
+             routeValues: new
+                  {
+                 id = ogr.OGRENCID,
+                 tablo = 0
+             },
+             htmlAttributes: null
+            )
+        }
+    }
+    <div class="active">Öğrenciler</div>
+    @foreach (var ogr in ViewBag.ogrenciler)
+    {
+        @*<a href="/Ogretmen/Mesajlar/@ogr.ID">@ogr.ISIM</a>*@
+        String isim = ogr.ISIM;
+        @Html.ActionLink(
+         linkText: isim,
+         actionName: "Mesajlar",
+         controllerName: "Yonetici",
+         routeValues: new
+              {
+             id = ogr.ID,
+             tablo = 0
+         },
+         htmlAttributes: null
+        )
+    }
+</div>
+

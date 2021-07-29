@@ -1,0 +1,47 @@
+﻿@model BitirmeProjesi.Models.Entity.TBLYoneticiler
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Yönetici Giriş</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/ogrencigirisekrani.css">
+    <link rel="icon" href="icons/logorgb.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+</head>
+
+
+<body>
+
+
+    <h1 style="text-align:center;  font-size: 60px;"> <i class="fa fa-users"></i> Yönetici Girişi</h1>
+
+
+    <div class="form">
+        <div class="tab-content">
+            <!-- bu tabların içerikleri-->
+            <div class="tab-body active">
+                <div class="form-element">
+                    <!-- Girişin form elementleri tanımlanıyor-->
+                    @using (Html.BeginForm("YoneticiGiris", "Yonetici", FormMethod.Post))
+                    {
+                        <input type="text" style="margin-top:5px;" placeholder="Email " name="MAIL">
+                        <input type="password" style="margin-top:5px;" placeholder="Parola" name="SIFRE">
+                        <button type="submit" style="margin-top:5px;">GİRİŞ YAP</button> <!-- Giriş yap butonu-->
+                    }
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <script src="~/Content/scripts/ogrencigirisekrani.js"></script>
+</body>
+</html>
+

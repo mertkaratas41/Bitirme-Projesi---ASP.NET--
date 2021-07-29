@@ -1,0 +1,143 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model List<TBLMesajlar>
+@{
+    ViewBag.Title = "Mesajlar";
+    Layout = "~/Views/Shared/_Ogretmen.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Mesaj.css">
+
+<div style="margin-top:50px;"></div>
+@{int tablo = ViewBag.tablo, deneme = ViewBag.ogretmenId;}
+@{ List<TBLMesajlar> tekrarlar = new List<TBLMesajlar>(); List<TBLMesajlar> mesajlarım = new List<TBLMesajlar>(); int sayac = 0;}
+@foreach (var ogr in Model)
+{
+    mesajlarım.Add(ogr);
+}
+@{ var elde = mesajlarım.Where(x => x.OGRETMENID == deneme);}
+@{ var elde1 = elde.GroupBy(test => test.OGRENCID)
+                     .Select(grp => grp.Last())
+                     .ToList();}
+<div class="sidebar">
+
+    <div class="active">Adminler</div>
+    @foreach (var ogr in ViewBag.yoneticiler)
+    {
+        @*<a href="/Ogrenci/Mesajlar/@ogr.ID">@ogr.ISIM</a>*@
+        <!--@Html.ActionLink("Mesajlar", "Mesajlar", new { id = ogr.ID, tablo = 2 }, null) ;-->
+        String isim = ogr.ISIM;
+
+        @Html.ActionLink(
+             linkText: isim,
+             actionName: "Mesajlar",
+             controllerName: "Ogretmen",
+             routeValues: new
+                  {
+                 id = ogr.ID,
+                 tablo = 2
+             },
+             htmlAttributes: null
+            )
+    }
+    <div class="active">Öğrenci Mesajlarım</div>
+
+    @foreach (var ogr in elde1)
+    {
+        if (ogr.OGRETMENID == deneme && ogr.OGRENCID != null)
+        {
+            @*<a href="/Ogretmen/Mesajlar/@ogr.OGRENCID">@ogr.TBLOgrenciler.ISIM</a>*@
+            String isim = ogr.TBLOgrenciler.ISIM;
+            @Html.ActionLink(
+             linkText: isim,
+             actionName: "Mesajlar",
+             controllerName: "Ogretmen",
+             routeValues: new
+                  {
+                 id = ogr.OGRENCID,
+                 tablo = 0
+             },
+             htmlAttributes: null
+            )
+        }
+    }
+    <div class="active">Ogrenciler</div>
+    @foreach (var ogr in ViewBag.ogr)
+    {
+        @*<a href="/Ogretmen/Mesajlar/@ogr.ID">@ogr.ISIM</a>*@
+        String isim = ogr.ISIM;
+        @Html.ActionLink(
+         linkText: isim,
+         actionName: "Mesajlar",
+         controllerName: "Ogretmen",
+         routeValues: new
+              {
+             id = ogr.ID,
+             tablo = 0
+         },
+         htmlAttributes: null
+        )
+    }
+    @ViewBag.id
+</div>
+
+<div class="content">
+
+    @foreach (var mesaj in Model)
+    {
+        if (tablo == 0)
+        {
+            if (mesaj.OGRETMENID == deneme && mesaj.OGRENCID == ViewBag.id)
+            {
+                if (sayac == 0)
+                {
+                    <div class="darker"><h2 style="text-align:center;">@mesaj.TBLOgrenciler.ISIM</h2></div>
+                    sayac++;
+                }
+                if (mesaj.MESAJYOLU == 1)
+                {
+                    <div class="mesaj darker">
+                        <p>@mesaj.MESAJ</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="mesaj">
+                        <p>@mesaj.MESAJ</p>
+                    </div>
+                }
+            }
+        }
+        else
+        {
+            if (mesaj.OGRETMENID == deneme && mesaj.YONETICIID == ViewBag.id)
+            {
+                if (sayac == 0)
+                {
+                    <div class="darker"><h2 style="text-align:center;">@mesaj.TBLYoneticiler.ISIM</h2></div>
+                    sayac++;
+                }
+                if (mesaj.MESAJYOLU == 1)
+                {
+                    <div class="mesaj darker">
+                        <p>@mesaj.MESAJ</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="mesaj">
+                        <p>@mesaj.MESAJ</p>
+                    </div>
+                }
+            }
+        }
+
+    }
+    @using (Html.BeginForm("MesajGonder", "Ogretmen", FormMethod.Post))
+    {
+        <input type="text" style="margin-top:5px;width:500px;height:30px;" placeholder="Mesajınız " name="mesaj">
+        <input type="text" style="margin-top:5px;" placeholder="id" hidden name="id" value="@ViewBag.id">
+        <input type="text" style="margin-top:5px;" placeholder="id" hidden name="tablo" value="@tablo">
+        <button type="submit" class="btn btn-light" style="margin-top:5px; ">Mesajı Gönder</button> <!-- Giriş yap butonu-->
+    }
+</div>
+

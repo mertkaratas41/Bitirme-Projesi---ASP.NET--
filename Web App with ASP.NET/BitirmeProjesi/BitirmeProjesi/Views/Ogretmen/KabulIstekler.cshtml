@@ -1,0 +1,85 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model List<TBLIstekler>
+@{
+    ViewBag.Title = "KabulIstekler";
+    Layout = "~/Views/Shared/_Ogretmen.cshtml";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h2>KabulIstekler</h2>
+<center><a href="/Ogretmen/Duyurular/" style="text-align:center;margin-top:10px;" class="btn btn-light">Duyurular</a></center>
+
+@{int sayac = 0, deneme = ViewBag.ogretmenId; }
+<table class="table table-bordered" style="margin-top:10px;">
+    <tr>
+        <th>Ap</th>
+        <th>Adı-Soyadı</th>
+        <th>Bölümü</th>
+        <th>Numarası</th>
+        <th>Adresi</th>
+        <th>Telefon</th>
+        <th>
+            @using (Html.BeginForm("ExcelExport", "Ogretmen", FormMethod.Post))
+            {
+
+                <input type="text" style="margin-top:5px;" placeholder="deger " name="i" hidden value="1">
+                <button type="submit" class="btn btn-dark" style="margin-top:5px;">Ap Listesi İndir</button> <!-- Giriş yap butonu-->
+            }
+        </th>
+    </tr>
+    @foreach (var ogr in Model)
+    {
+        if (ogr.APID == deneme && ogr.APONAY == 1)
+        {
+            <tr>
+                <th>@(sayac+1)</th>
+                <td>@ogr.TBLOgrenciler.ISIM</td>
+                <td>@ogr.TBLOgrenciler.BOLUM</td>
+                <th>@ogr.TBLOgrenciler.NUMARA</th>
+                <td>@ogr.TBLOgrenciler.ADRES</td>
+                <td>@ogr.TBLOgrenciler.TELEFON</td>
+            </tr>
+            sayac++;
+        }
+
+
+    }
+    @{ sayac = 0;}
+</table>
+<table class="table table-bordered">
+    <tr>
+        <th>Bp</th>
+        <th>Adı-Soyadı</th>
+        <th>Bölümü</th>
+        <th>Numarası</th>
+        <th>Adresi</th>
+        <th>Telefon</th>
+        <th>
+            @using (Html.BeginForm("ExcelExport", "Ogretmen", FormMethod.Post))
+            {
+                <input type="text" style="margin-top:5px;" placeholder="deger " name="i" hidden value="2">
+                <button type="submit" class="btn btn-dark" style="margin-top:5px;">Bp Listesi İndir</button> <!-- Giriş yap butonu-->
+            }
+        </th>
+    </tr>
+    @foreach (var ogr in Model)
+    {
+        if (ogr.BPID == deneme && ogr.BPONAY == 1)
+        {
+            <tr>
+                <th>@(sayac+1)</th>
+                <td>@ogr.TBLOgrenciler.ISIM</td>
+                <td>@ogr.TBLOgrenciler.BOLUM</td>
+                <th>@ogr.TBLOgrenciler.NUMARA</th>
+                <td>@ogr.TBLOgrenciler.ADRES</td>
+                <td>@ogr.TBLOgrenciler.TELEFON</td>
+            </tr>
+            sayac++;
+        }
+
+
+    }
+</table>
+@*@ViewBag.ogretmenId*@
+
+

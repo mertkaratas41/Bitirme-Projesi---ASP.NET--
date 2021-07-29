@@ -1,0 +1,106 @@
+﻿@using BitirmeProjesi.Models.Entity
+@model List<TBLIstekler>
+@{
+    ViewBag.Title = "Istekler";
+    Layout = "~/Views/Shared/_Ogretmen.cshtml";
+    
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<h2>Istekler</h2>
+@{int sayac = 0, deneme = ViewBag.ogretmenId; }
+<table class="table table-bordered">
+    <tr>
+        <th>Ap</th>
+        <th>Adı-Soyadı</th>
+        <th>Bölümü</th>
+        <th>Numarası</th>
+        <th>Adresi</th>
+        <th>Telefon</th>
+        <th>Açıklama</th>
+
+    </tr>
+    @foreach (var ogr in Model)
+    {
+        if (ogr.APID == deneme && ogr.APONAY == 0)
+        {
+            <tr>
+                <th>@(sayac+1)</th>
+                <td>@ogr.TBLOgrenciler.ISIM</td>
+                <td>@ogr.TBLOgrenciler.BOLUM</td>
+                <th>@ogr.TBLOgrenciler.NUMARA</th>
+                <td>@ogr.TBLOgrenciler.ADRES</td>
+                <td>@ogr.TBLOgrenciler.TELEFON</td>
+                <td>@ogr.APACIKLAMA</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    @using (Html.BeginForm("ApRedcik", "Ogretmen", FormMethod.Post))
+                    {
+                        <input type="text" style="margin-top:5px;" placeholder="id" hidden name="id" value="@ogr.OGRENCIID">
+                        <input type="text" style="margin-top:5px;" placeholder="Cevap" name="yazi">
+                        <button type="submit" class="btn btn-danger" style="margin-top:5px;">REDDET</button> <!-- Giriş yap butonu-->
+                    }
+                </td>
+                <td colspan="3">
+                    @using (Html.BeginForm("ApOnaycik", "Ogretmen", FormMethod.Post))
+                    {
+                        <input type="text" style="margin-top:5px;" placeholder="id" hidden name="id" value="@ogr.OGRENCIID">
+                        <input type="text" style="margin-top:5px;" placeholder="Cevap" name="yazi">
+                        <button type="submit" class="btn btn-success" style="margin-top:5px;">Kabul ET</button> <!-- Giriş yap butonu-->
+                    }
+                </td>
+            </tr>
+            sayac++;
+        }
+    }
+    @{ sayac = 0;}
+</table>
+<table class="table table-bordered">
+    <tr>
+        <th>Bp</th>
+        <th>Adı-Soyadı</th>
+        <th>Bölümü</th>
+        <th>NUmarası</th>
+        <th>Adresi</th>
+        <th>Telefon</th>
+        <th>Açıklama</th>
+    </tr>
+    @foreach (var ogr in Model)
+    {
+        if (ogr.BPID == deneme && ogr.BPONAY == 0)
+        {
+            <tr>
+                <th>@(sayac+1)</th>
+                <td>@ogr.TBLOgrenciler.ISIM</td>
+                <td>@ogr.TBLOgrenciler.BOLUM</td>
+                <th>@ogr.TBLOgrenciler.NUMARA</th>
+                <td>@ogr.TBLOgrenciler.ADRES</td>
+                <td>@ogr.TBLOgrenciler.TELEFON</td>
+                <td>@ogr.BPACIKLAMA</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    @using (Html.BeginForm("BpRedcik", "Ogretmen", FormMethod.Post))
+                    {
+                        <input type="text" style="margin-top:5px;" placeholder="id" hidden name="id" value="@ogr.OGRENCIID">
+                        <input type="text" style="margin-top:5px;" placeholder="Cevap" name="yazi">
+                        <button type="submit" class="btn btn-danger" style="margin-top:5px;">REDDET</button> 
+                    }
+                </td>
+                <td colspan="3">
+                    @using (Html.BeginForm("BpOnaycik", "Ogretmen", FormMethod.Post))
+                    {
+                        <input type="text" style="margin-top:5px;" placeholder="id" hidden name="id" value="@ogr.OGRENCIID">
+                        <input type="text" style="margin-top:5px;" placeholder="Cevap" name="yazi">
+                        <button type="submit" class="btn btn-success" style="margin-top:5px;">Kabul ET</button> 
+                    }
+                </td>
+            </tr>
+            sayac++;
+        }
+
+
+    }
+</table>
+@*@ViewBag.ogretmenId*@
